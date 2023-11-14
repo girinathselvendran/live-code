@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { v4 as uuid } from "uuid";
 
@@ -21,6 +21,11 @@ export const UserComponent = () => {
     userName: "",
     isLoggedIn: false,
   });
+  const emailId = localStorage.getItem("emailId");
+
+  useEffect(() => {
+    if (!emailId) navigate("/");
+  }, [emailId]);
 
   const handleSubmit = () => {
     if (user.isLoggedIn) {
