@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { v4 as uuid } from "uuid";
 
@@ -25,38 +25,31 @@ export const UserComponent = () => {
   const handleSubmit = () => {
     if (user.isLoggedIn) {
       setName(user.userName);
-      console.log("user.name  00000", user.userName);
       navigate("/editor/" + user.uuId);
     } else {
       if (!user.uuId.trim() || !user.userName.trim()) {
         toast.error("Room ID and username is required");
       } else {
         setName(user.userName);
-        console.log("user.name 111111", user.userName);
         navigate("/editor/" + user.uuId);
       }
     }
   };
 
   const handleSwitchAuth = () => {
-    console.log("uuid()", uuid());
     if (user.isLoggedIn) {
-      // loging
-
       setUser((prevUser) => ({
         ...prevUser,
         uuId: "",
         isLoggedIn: !user.isLoggedIn,
       }));
     } else {
-      // reg
       setUser((prevUser) => ({
         ...prevUser,
         uuId: uuid(),
         isLoggedIn: !user.isLoggedIn,
       }));
     }
-    console.log("user", user);
   };
   const handleLogout = () => {
     localStorage.clear();
