@@ -1,46 +1,53 @@
-# Getting Started with Create React App
+# Live Code - Real-time Code Collaboration
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Live Code is a real-time code collaboration web application that allows multiple users to collaborate on code in the same virtual room. It's built using the MERN (MongoDB, Express.js, React, Node.js) stack and Socket.IO for real-time communication.
 
-## Available Scripts
+## Live Demo
 
-In the project directory, you can run:
+You can try out Live Code by visiting the [live demo](https://live-code-three.vercel.app/editor/asdf). Signup new account and  Create or join a room and start collaborating with others in real time!
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Create or join a virtual "room" by entering a room ID.
+- Set your username to identify yourself in the room.
+- Real-time code collaboration with other users in the same room.
+- Changes made by one user are instantly reflected on all connected clients.
+- Code highlighting and editor customization options.
 
-### `npm test`
+## Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Express.js: Handling API requests.
+- React: Building the front-end interface.
+- Node.js: Running the server.
+- Socket.IO: Enabling real-time communication.
+- uuid: Generating unique room IDs.
+- CodeMirror: Providing the code editor.
 
-### `npm run build`
+## Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Open the [Live Code live demo](https://live-code-three.vercel.app/room-auth).
+2. Enter a Room ID or generate a new one.
+3. Set your username.
+4. Start collaborating with others in the same room.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Development
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If you want to run Live Code locally or contribute to its development, follow these steps:
 
-### `npm run eject`
+1. Clone the repository:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+   ```bash
+Frontend URL : git clone https://github.com/girinathselvendran/live-code.git
+Backend URL : git clone https://github.com/girinathselvendran/live-code-backend.git
+   cd Live Code
+   ```
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Start the development server:
+    Create mongoDB and config .env 
+   ```
+   npm start
+   ```
