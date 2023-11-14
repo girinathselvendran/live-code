@@ -38,7 +38,7 @@ export const Auth = () => {
           emailId: user.emailId,
           password: user.password,
         });
-       
+
         if (res.data.status == 200) {
           toast.success(`User Login Successfully.`);
           navigate("/room-auth");
@@ -59,6 +59,10 @@ export const Auth = () => {
   };
   const handleSwitchAuth = () => {
     setNewUser(!newUser);
+    setUser({
+      emailId: "",
+      password: "",
+    });
   };
 
   return (
