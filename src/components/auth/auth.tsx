@@ -26,7 +26,6 @@ export const Auth = () => {
           emailId: user.emailId,
           password: user.password,
         });
-        console.log("res.data", res.data);
         if (res.data.status == 200) {
           toast.success(`User Register Successfully.`);
           localStorage.setItem("emailId", user.emailId);
@@ -39,9 +38,7 @@ export const Auth = () => {
           emailId: user.emailId,
           password: user.password,
         });
-        console.log("res.data", res.data);
-        console.log("res.data.status", res.data.status);
-
+       
         if (res.data.status == 200) {
           toast.success(`User Login Successfully.`);
           navigate("/room-auth");
@@ -51,10 +48,9 @@ export const Auth = () => {
         }
       }
     } catch (error: any) {
-      console.log("error", error.response.data.data);
-      if (error.response.data.status == 400) {
+      if (error?.response?.data?.status == 400) {
         toast.error(error.response.data.data);
-      } else if (error.response.data.status == 409) {
+      } else if (error?.response?.data?.status == 409) {
         toast.error(error.response.data.data);
       } else {
         toast.error("Some thing went wrong.");
