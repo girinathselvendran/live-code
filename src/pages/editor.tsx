@@ -1,14 +1,13 @@
-// import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { FaRegCopy } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { dummyFilesData } from "../utilitiy/data";
-import { Outlet, Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ClientAvatar from "../components/client/clientAvatar";
 import { useGlobalContext } from "../context/context";
 import { EditorComponent } from "../components/editor/editor";
 import ConsoleSection from "../components/consoleSection/consoleSection";
-import { io, Socket } from "socket.io-client";
+import { Socket } from "socket.io-client";
 import "./pages.css";
 import { ACTIONS } from "../utilitiy/common/socketActions";
 import { initSocket } from "../utilitiy/common/socket";
@@ -21,10 +20,7 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
   const [js, setJs] = useState("console.log('Hello world')");
   const { id } = useParams<any>();
   const socketRef = useRef<Socket | null>(null);
-
-  const LCLogo = "../asserts/LC.png";
   const navigate = useNavigate();
-
   const fileNameBarClasses = "fileNameList  ";
   const [activeFile, setActiveFile] = useState("index.html");
   const [srcDoc, setSrcDoc] = useState("");
@@ -32,9 +28,8 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
   const { name, setName } = useGlobalContext();
   const [clientList, setClients] = useState([]);
 
-  function joinEventhandler({ clients, username, socketId }: any) {
+  function joinEventHandler({ clients, username, socketId }: any) {
     setClients(clients);
-    console.log("username :-------", username, name);
 
     if (username !== name) {
       toast.success(`${username} joined the room`);
@@ -48,15 +43,12 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
   }
 
   function handleErrors(e?: Error) {
-    console.log("Socket error", e && e?.message);
     toast.error("Socket Connection failed, try again later");
     setTimeout(() => {
-      //   router.push("/");
+      // navigate("/");
     }, 4000);
   }
   async function copyRoomId() {
-    console.log("From cccc", html, css, js);
-
     try {
       await navigator.clipboard.writeText(roomId as string);
       toast.success("Room ID has been copied to your clipboard");
@@ -72,8 +64,6 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
   }
 
   useEffect(() => {
-    console.log("name", name);
-
     if (!name || name === "") {
       navigate("/");
     }
@@ -87,9 +77,8 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
         roomId,
         username: name ? name : "",
       });
-      console.log("name roomId", name, roomId);
 
-      socketRef.current.on(ACTIONS.JOINED, joinEventhandler);
+      socketRef.current.on(ACTIONS.JOINED, joinEventHandler);
 
       socketRef.current.on(ACTIONS.CODE_CHANGE, ({ html, css, js }) => {
         setHtml(html);
@@ -211,7 +200,6 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
                 height={50}
                 src={
                   "https://drive.google.com/uc?id=1zKNk8rMeQU-_USMqd5M-UDPW-bJiTgzy"
-                  // "https://o.remove.bg/downloads/984fc367-8ce1-4091-98f2-2f86baf8fe0a/LC-removebg-preview.png"
                 }
               />
               <h2>Live Code</h2>
@@ -248,15 +236,6 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
                   username={client.username}
                 />
               ))}
-              {/* <ClientAvatar username="patil" />
-              <ClientAvatar username="adad" /> */}
-              {/* <ClientAvatar username="adad" />
-                            <ClientAvatar username="adad" />
-                            <ClientAvatar username="adad" />
-                            <ClientAvatar username="adad" />
-                            <ClientAvatar username="da" />
-                            <ClientAvatar username="Naaadaan" />
-                            <ClientAvatar username="Naayan" /> */}
             </div>
           </div>
           <div className="room-info">
