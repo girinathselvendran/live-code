@@ -1,0 +1,6 @@
+.editor-component {
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  flex-direction: column;
+}

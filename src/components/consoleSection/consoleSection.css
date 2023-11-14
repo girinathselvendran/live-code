@@ -1,0 +1,25 @@
+.console-header {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  color: white;
+  font-size: 18px;
+  padding: 5px;
+}
+.console-body {
+  background-color: #27028d;
+  height: 37vh;
+  overflow-x: scroll;
+}
+.console-body p {
+  margin: 0px;
+}
+.console-header p {
+  margin: 0 10px;
+}
+.text-red {
+  color: red;
+}
+.text-white {
+  color: white;
+}

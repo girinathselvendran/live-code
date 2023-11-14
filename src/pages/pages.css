@@ -1,0 +1,101 @@
+.df {
+  display: flex;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.editor-main {
+  display: flex;
+  width: 100%;
+}
+.editor-section {
+  /* width: 40%; */
+  display: flex;
+  /* width: 100%; */
+}
+.editor-left-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.left-code-info {
+  background-color: #271e3f;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  /* width: 200px; */
+  padding: 10px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+}
+.bg-black {
+  background-color: black;
+}
+
+.fileNameList {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: start;
+  width: 100%;
+}
+
+.fileNameList:hover {
+  background-color: black;
+}
+
+.room-info {
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  margin: 20px;
+  justify-content: center;
+}
+.room-info button {
+  padding: 10px 20px;
+  margin: 5px;
+  color: white;
+  font-size: 13px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.copy-room-id:hover {
+  background-color: rgb(19, 145, 19);
+}
+.leave-room:hover {
+  background-color: rgb(230, 32, 32);
+}
+.copy-room-id {
+  background-color: rgb(27, 186, 64);
+}
+
+.leave-room {
+  background-color: rgb(192, 25, 25);
+}
+.editor-component {
+  min-width: 60vw;
+}
+.output-console {
+  /* width: 20%; */
+  min-width: 10vw;
+}
+.output-console iframe {
+  /* min-width: 400px; */
+  height: 60vh;
+}
+
+.client-avatar-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
