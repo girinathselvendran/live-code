@@ -43,6 +43,8 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
   }
 
   function handleErrors(e?: Error) {
+    console.log("handleErrors:-",e);
+    
     toast.error("Socket Connection failed, try again later");
     setTimeout(() => {
       // navigate("/");
