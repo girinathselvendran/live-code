@@ -17,8 +17,8 @@ export const EditorComponent: React.FC<EditorComponentProps> = ({
 }) => {
   return (
     <div>
-      <div className=" editor-component h-10 bg-bgdark p-8 flex items-center justify-center">
-        <button onClick={onClickFunc} className="primary-button" type="submit">
+      <div className=" editor-component">
+        <button onClick={onClickFunc} className="run-button" type="submit">
           Run
         </button>
 
