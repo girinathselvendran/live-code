@@ -37,6 +37,7 @@
 }
 .bg-black {
   background-color: black;
+  padding: 0px 10px;
 }
 
 .fileNameList {
