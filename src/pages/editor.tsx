@@ -8,9 +8,9 @@ import { useGlobalContext } from "../context/context";
 import { EditorComponent } from "../components/editor/editor";
 import ConsoleSection from "../components/consoleSection/consoleSection";
 import { Socket } from "socket.io-client";
-import "./pages.css";
 import { ACTIONS } from "../utilitiy/common/socketActions";
 import { initSocket } from "../utilitiy/common/socket";
+import "./pages.css";
 
 interface EditorProps {}
 
@@ -18,17 +18,17 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
   const [html, setHtml] = useState("<h1>Hello World</h1>");
   const [css, setCss] = useState("");
   const [js, setJs] = useState("console.log('Hello world')");
-  const { id } = useParams<any>();
-  const socketRef = useRef<Socket | null>(null);
-  const navigate = useNavigate();
-  const fileNameBarClasses = "fileNameList  ";
   const [activeFile, setActiveFile] = useState("index.html");
   const [srcDoc, setSrcDoc] = useState("");
-  const roomId = id;
-  const { name, setName } = useGlobalContext();
   const [clientList, setClients] = useState([]);
+  const { name, setName } = useGlobalContext();
+  const socketRef = useRef<Socket | null>(null);
+  const { id } = useParams<any>();
+  const navigate = useNavigate();
+  const roomId = id;
+  const fileNameBarClasses = "fileNameList  ";
 
-  function joinEventHandler({ clients, username, socketId }: any) {
+  const joinEventHandler=({ clients, username, socketId }: any)=> {
     setClients(clients);
 
     if (username !== name) {
@@ -42,15 +42,13 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
     }
   }
 
-  function handleErrors(e?: Error) {
-    console.log("handleErrors:-",e);
-    
+  const handleErrors =(e?: Error)=> {    
     toast.error("Socket Connection failed, try again later");
     setTimeout(() => {
       // navigate("/");
     }, 4000);
   }
-  async function copyRoomId() {
+  const copyRoomId=async()=> {
     try {
       await navigator.clipboard.writeText(roomId as string);
       toast.success("Room ID has been copied to your clipboard");
@@ -60,7 +58,7 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
     }
   }
 
-  function leaveRoom() {
+  const leaveRoom=()=> {
     navigate("/");
     setName("");
   }

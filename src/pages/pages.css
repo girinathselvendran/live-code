@@ -9,9 +9,7 @@
   width: 100%;
 }
 .editor-section {
-  /* width: 40%; */
   display: flex;
-  /* width: 100%; */
 }
 .editor-left-content {
   display: flex;
@@ -24,7 +22,6 @@
   color: white;
   display: flex;
   flex-direction: column;
-  /* width: 200px; */
   padding: 10px;
 }
 
@@ -87,11 +84,9 @@
   min-width: 60vw;
 }
 .output-console {
-  /* width: 20%; */
   min-width: 10vw;
 }
 .output-console iframe {
-  /* min-width: 400px; */
   height: 60vh;
 }
 

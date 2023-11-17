@@ -5,7 +5,6 @@ interface MyContextData {
   setName: React.Dispatch<React.SetStateAction<string>>;
 }
 
-// Create the context with an initial value
 export const GlobalContext = createContext<MyContextData | undefined>(
   undefined
 );

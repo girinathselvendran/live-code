@@ -21,7 +21,6 @@
     border-radius: 15px 15px 0 0;
     color: #fff;
     font-size: 30px;
-    /* font-weight: 600; */
     line-height: 60px;
     text-align: center;
     -webkit-user-select: none;
@@ -132,5 +131,4 @@ form .signup-link a:hover {
 .signup-link span {
   cursor: pointer;
   color: blue;
-  /* text-decoration: underline; */
 }
