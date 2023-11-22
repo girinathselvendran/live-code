@@ -1,4 +1,4 @@
-export const dummyFilesData = {
+export const programFilesData:any = {
     "index.html" : {
         name:"index.html",
         iconName: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg",

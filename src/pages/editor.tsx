@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaRegCopy } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { dummyFilesData } from "../utilitiy/data";
 import { useNavigate, useParams } from "react-router-dom";
 import ClientAvatar from "../components/client/clientAvatar";
-import { useGlobalContext } from "../context/context";
 import { EditorComponent } from "../components/editor/editor";
 import ConsoleSection from "../components/consoleSection/consoleSection";
+import { programFilesData } from "../utilitiy/data";
+import { useGlobalContext } from "../context/context";
 import { Socket } from "socket.io-client";
 import { ACTIONS } from "../utilitiy/common/socketActions";
 import { initSocket } from "../utilitiy/common/socket";
@@ -27,6 +27,53 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
   const navigate = useNavigate();
   const roomId = id;
   const fileNameBarClasses = "fileNameList  ";
+
+
+  useEffect(() => {
+    if (!name || name === "") {
+      navigate("/");
+    }
+
+    const init = async () => {
+      socketRef.current = await initSocket();
+      socketRef.current.on("connect_error", (err: any) => handleErrors(err));
+      socketRef.current.on("connect_failed", (err: any) => handleErrors(err));
+
+      socketRef.current.emit(ACTIONS.JOIN, {
+        roomId,
+        username: name ? name : "",
+      });
+
+      socketRef.current.on(ACTIONS.JOINED, joinEventHandler);
+
+      socketRef.current.on(ACTIONS.CODE_CHANGE, ({ html, css, js }) => {
+        setHtml(html);
+        setCss(css);
+        setJs(js);
+      });
+
+      socketRef.current.on(ACTIONS.DISCONNECTED, ({ username, socketId }) => {
+        toast.success(`${username} has left the room`);
+        
+        setClients((prev) => prev.filter((c:any) => c.socketId !== socketId));
+      });
+    };
+
+    init();
+
+    return () => {
+      socketRef.current?.disconnect();
+      socketRef.current?.off(ACTIONS.JOINED);
+      socketRef.current?.off(ACTIONS.DISCONNECTED);
+    };
+  }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      changeCode();
+    }, 1000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   const joinEventHandler=({ clients, username, socketId }: any)=> {
     setClients(clients);
@@ -63,45 +110,6 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
     setName("");
   }
 
-  useEffect(() => {
-    if (!name || name === "") {
-      navigate("/");
-    }
-
-    const init = async () => {
-      socketRef.current = await initSocket();
-      socketRef.current.on("connect_error", (err: any) => handleErrors(err));
-      socketRef.current.on("connect_failed", (err: any) => handleErrors(err));
-
-      socketRef.current.emit(ACTIONS.JOIN, {
-        roomId,
-        username: name ? name : "",
-      });
-
-      socketRef.current.on(ACTIONS.JOINED, joinEventHandler);
-
-      socketRef.current.on(ACTIONS.CODE_CHANGE, ({ html, css, js }) => {
-        setHtml(html);
-        setCss(css);
-        setJs(js);
-      });
-
-      socketRef.current.on(ACTIONS.DISCONNECTED, ({ username, socketId }) => {
-        toast.success(`${username} has left the room`);
-        // @ts-ignore
-        setClients((prev) => prev.filter((c) => c.socketId !== socketId));
-      });
-    };
-
-    init();
-
-    return () => {
-      socketRef.current?.disconnect();
-      socketRef.current?.off(ACTIONS.JOINED);
-      socketRef.current?.off(ACTIONS.DISCONNECTED);
-    };
-  }, []);
-
   const changeCode = () => {
     setSrcDoc(`
       <html>
@@ -135,13 +143,6 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
       `);
   };
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      changeCode();
-    }, 1000);
-    return () => clearTimeout(timeout);
-  }, []);
-
   const getCodeByFileName = (fileName: string): string => {
     let code = "";
     switch (fileName) {
@@ -162,6 +163,7 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
     }
     return code;
   };
+
   const ChangeCodeByFileName = (fileName: string, value: string) => {
     switch (fileName) {
       case "index.html":
@@ -206,9 +208,8 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
             </div>
             <hr />
             <div className="flex-col  my-4 w-full ">
-              {Object.keys(dummyFilesData).map((keyName, i) => {
-                // @ts-ignore
-                let fileData = dummyFilesData[keyName];
+              {Object.keys(programFilesData).map((keyName, i) => {
+                let fileData = programFilesData[keyName];
 
                 return (
                   <div
@@ -259,8 +260,7 @@ export const EditorPage: React.FC<EditorProps> = ({}) => {
               }}
               code={getCodeByFileName(activeFile)}
               language={
-                // @ts-ignore
-                dummyFilesData[activeFile]?.language
+                programFilesData[activeFile]?.language
               }
             />
           </div>
