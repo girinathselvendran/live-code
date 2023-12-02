@@ -23,9 +23,9 @@ export const UserComponent = () => {
   });
   const emailId = localStorage.getItem("emailId");
 
-  useEffect(() => {
-    if (!emailId) navigate("/");
-  }, [emailId]);
+  // useEffect(() => {
+  //   // if (!emailId) navigate("/");
+  // }, [emailId]);
 
   const handleSubmit = () => {
     if (user.isLoggedIn) {
