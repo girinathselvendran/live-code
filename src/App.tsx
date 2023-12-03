@@ -27,19 +27,14 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<Authentication />} 
-            />
-                 {/* <Route
-              path="/"
               element={<PrivateRoute component="auth" children={<Auth />} />}
-            /> */}
-            {/* <Route path="/" element={<Auth />}></Route> */}
+            />
+            <Route path="/" element={<Auth />}></Route>
             <Route path="/room-auth" element={<Authentication />}></Route>
             <Route path="/editor/:id" element={<EditorPage />} />
           </Routes>
         </BrowserRouter>
       </GlobalContext.Provider>
-
     </>
   );
 }
