@@ -21,7 +21,6 @@ export const EditorComponent: React.FC<EditorComponentProps> = ({
         <button onClick={onClickFunc} className="run-button" type="submit">
           Run
         </button>
-
         <Editor
           className="text-xl"
           height="91vh"
